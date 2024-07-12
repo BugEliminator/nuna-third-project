@@ -3,6 +3,8 @@
 
 body {
   font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+  background-color: #F5F5F5;
+  color: #2C3E50;
 }
 
 .container {
@@ -13,6 +15,7 @@ body {
   display: flex;
   align-items: center;
   margin: 10px;
+  height: 25px;
 }
 
 #searchInput {
@@ -26,6 +29,11 @@ body {
 
 #searchBtn {
   margin: 0 20px;
+}
+
+h1{
+  font-size: 50px;
+  font-weight: 800;
 }
 
 .head-line {
@@ -42,27 +50,43 @@ body {
   margin-top: 1em;
   display: flex;
   justify-content: center;
-  border-top: 1px solid #ebebeb;
-  border-bottom: 4px double #000;
+  border-top: 2px solid #ebebeb;
+  border-bottom: 4px double #2C3E50;
 }
 
 .menus button {
   border: none;
   background: none;
   margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #2C3E50;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .menus button:hover {
- background-color: beige; 
+  background-color: #2C3E50; /* 밝은 배경색 */
+  color: #ffffff; /* 텍스트 색상 */
+  transform: scale(1.1); /* 버튼 크기 확대 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  border-radius: 10px; /* 둥근 모서리 */
 }
 
-.newsImg {
+.menus button:focus {
+  outline: none;
+  background-color: #ffeeba; /* 포커스 상태 배경색 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 포커스 상태 그림자 효과 */
+  border-radius: 10px; /* 둥근 모서리 */
+}
+
+img {
   max-width: 100%;
   max-height: 350px;
 }
 
 .news {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #2C3E50;
 }
 
 /* The side navigation menu */
@@ -74,6 +98,7 @@ body {
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #111; /* Black*/
+  opacity: .8;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -89,8 +114,26 @@ body {
   transition: 0.3s;
 }
 
+.closeBtn {
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  background-color: #111;
+  border: 0 solid #111;
+  display: block;
+  transition: 0.3s;
+  position: relative;
+  top: -30px;
+  left: 180px;
+  font-weight: 600;
+}
+
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closeBtn:hover {
   color: #f1f1f1;
 }
 
@@ -119,11 +162,13 @@ body {
   padding: 10px;
 }
 
-.col-lg-4 {
+.col-lg-4 img{
   width: 300px;
 }
 
-
+.noImg {
+  width: 300px;
+}
 
 .upToScroll {
   position: fixed;
@@ -152,8 +197,6 @@ body {
   transform: scale(0.95);
 }
 
-
-
 .search-input {
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -165,8 +208,19 @@ body {
   color: #333;
   border: 1px solid #ccc;
   border-radius: 10px;
-
   font-size: 16px;
+  cursor: pointer;
+}
+
+#navBtn {
+  cursor: pointer;
+}
+
+#searchBtn {
+  cursor: pointer;
+}
+
+#main {
   cursor: pointer;
 }
 
@@ -174,8 +228,80 @@ body {
   background-color: #ddd;
 }
 
-
 .hidden {
   display: none;
 }
 
+/* Responsive Styles */
+@media screen and (max-width: 1190px) {
+  .head-line {
+    border-bottom: 2px solid #ebebeb;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .menus {
+    flex-wrap: wrap;
+  }
+
+  .menus button {
+    margin: 2px;
+  }
+
+  .col-lg-4 img {
+    width: 100%;
+    max-height: 200px;
+  }
+
+  .upToScroll {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+
+  .head-line {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .upToScroll {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  .menus {
+    display: none;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+
+  .sidenav {
+    padding-top: 30px;
+  }
+
+  .col-lg-4 img {
+    max-height: 150px;
+  }
+
+  .upToScroll {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
