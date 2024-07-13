@@ -49,16 +49,27 @@ let newsList = [];
 
 let url = new URL(` https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`)
 
+let totalResults = 0
+let page = 1
+let pageSize = 10
+let groupSize = 5
+
+ 
 const getNews = async() => {
   try{
+    url.searchParams.set("page", page); // => &page=page
+    url.searchParams.set("pageSize", pageSize);    
     const response = await fetch(url);
     const data = await response.json();
+    console.log("data", data)
     if(response.status === 200) {
         if(data.articles.length === 0) {
           throw new Error("이 검색에 대한 결과가 없습니다.");
         }
       newsList = data.articles;
+      totalResults = data.totalResults;
       render(); 
+      paginationRender();
     } else {
       throw new Error(data.message)
     }
@@ -78,8 +89,7 @@ const getLatesNews = async () => {
   await getNews();
 };
 
-// 페이지 로드 시 최신 뉴스를 가져옵니다.
-getLatesNews();
+
 
 // 카테고리별 뉴스를 가져오는 함수
 const getNewsByCategory = async (event) => {
@@ -180,3 +190,58 @@ const errorRender = (errorMassage) => {
 function scrollToTop() {
   window.scrollTo(0, 0);
 }
+
+const paginationRender = () => {
+   // totalREsult,
+   // page  1
+   // pageSize  10
+   // groupSize   5
+
+
+   // pageGroup
+   const pageGroup = Math.ceil(page / groupSize)
+
+  // totalPages
+   const totalPages = Math.ceil(totalResults / pageSize)
+
+   // lastPage
+   let lastPage = pageGroup * groupSize
+   if(lastPage > totalPages) {
+    lastPage = totalPages
+   }
+   // firstPage
+   const firstPage = 
+    lastPage - (groupSize - 1)<= 0? 1 : lastPage - (groupSize - 1);
+
+
+  let paginationHTML = `<li class="page-item" onClick="moveToPage(${page - 1})"><a class="page-link">Previous</a></li>`
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `<li class="page-item ${
+      i === page? "active" : "" 
+    }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`
+  }
+  paginationHTML += `<li class="page-item" onClick="moveToPage(${page + 1})"><a class="page-link">Next</a></li>`
+  document.querySelector(".pagination").innerHTML = paginationHTML
+
+  /*
+`<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link">Previous</a></li>
+    <li class="page-item"><a class="page-link">1</a></li>
+    <li class="page-item"><a class="page-link">2</a></li>
+    <li class="page-item"><a class="page-link">3</a></li>
+    <li class="page-item"><a class="page-link">Next</a></li>
+  </ul>
+</nav>`
+  */
+}
+
+const moveToPage = (pageNum) => {
+  console.log("출력", pageNum);
+  page = pageNum
+  getNews()
+}
+
+// 페이지 로드 시 최신 뉴스를 가져옵니다.
+getLatesNews();
