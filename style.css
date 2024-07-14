@@ -14,8 +14,9 @@ body {
 .topBtn {
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin-top: 20px;
   height: 25px;
+
 }
 
 #searchInput {
@@ -75,7 +76,8 @@ h1{
 
 .menus button:focus {
   outline: none;
-  background-color: #ffeeba; /* 포커스 상태 배경색 */
+  background-color: #2C3E50; /* 포커스 상태 배경색 */
+  color: #ffffff; /* 텍스트 색상 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 포커스 상태 그림자 효과 */
   border-radius: 10px; /* 둥근 모서리 */
 }
@@ -85,7 +87,7 @@ img {
   max-height: 350px;
 }
 
-.news {
+.row {
   border-bottom: 2px solid #2C3E50;
 }
 
@@ -315,5 +317,60 @@ img {
 }
 
 .pagination {
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+  list-style: none;
+  cursor: pointer;
+}
+
+.pagination .page-item {
+  margin: 0 0.5em;
+}
+
+.pagination .page-item .page-link {
+  display: block;
+  padding: 0.5em 0.75em;
+  color: #2C3E50;
+  background-color: #fff;
+  border: 1px solid #2C3E50;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-item .page-link:hover,
+.pagination .page-item .page-link:focus {
+  background-color: #2C3E50;
+  color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #2C3E50;
+  color: #fff;
+  border-color: #2C3E50;
+}
+
+.pagination .page-item.active .page-link:hover,
+.pagination .page-item.active .page-link:focus {
+  background-color: #1A2530;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .pagination .page-item {
+    margin: 0 3px;
+  }
+  
+  .pagination .page-item .page-link {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pagination .page-item .page-link {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
 }
